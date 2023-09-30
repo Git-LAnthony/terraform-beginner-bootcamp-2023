@@ -93,3 +93,17 @@ Environment variables store information about the environment in which a process
 **Scoping of Env vars**:
 
 When you open a new Bash terminal in VSCode, it will not be aware of environment variables set in another window. If you want the environment variable to persist across all future Bash terminals that are opened, you need to set the environment variable in your Bash profile, for example, in the `.bash-profile file`.
+
+## AWS CLI REFACTOR
+We will be using a bash script to automate the installation of AWS CLI.
+
+The script can be found in the [`./bin/install_aws_cli`](./bin/install_aws_cli)
+
+Follow the steps outlined in this [AWS document](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on how to install or update the latest release of the AWS Command Line Interface (AWS CLI).
+
+When setting up AWS credentials on your local environment it is recommended to use the AWS configuration file to set up env var, however when you are in a cloud development environment like Gitpod it is best to use gp env method.
+
+To verify the IAM user that is configured you can use the following command
+```sh
+aws sts get-caller-identity
+```
