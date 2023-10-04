@@ -107,3 +107,33 @@ To verify the IAM user that is configured you can use the following command
 ```sh
 aws sts get-caller-identity
 ```
+
+## TERRAFORM RANDOM PROVIDER
+For the bootcamp we will focus on Amazon Web Services (AWS) provider to interact with the many resources supported by AWS. It is required to configure the provider with the proper credentials before you can use it.
+
+**Terraform Provider**
+Is a plugin that enables interaction with an API. This includes Cloud providers and Software-as-a-service providers.
+
+**Terraform Registry**
+an interactive resource for discovering a wide selection of integrations (providers), configuration packages (modules), and security rules (policies) for use with Terraform
+You can find the AWS registry at [registry.terraform.io](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+
+**Terraform Lock file**
+This contains information about the exact package versions used to satisfy each provider requirement in your configuration.
+
+**Terraform State file**
+By default, it is named terraform Tfstate, it records information about what has been deployed by Terraform. **This file should not be committed to your repository** It contains sensitive data
+
+**Terraform Modules**
+Is a set of Terraform configuration files in a single directory.
+
+Some common terraform commands include the following
+
+- Terraform init: Is to set up the Terraform backend, modules, and providers. According to the documentation, Terraform uses the backend to store the state of your managed infrastructure and configuration. By default, Terraform uses a local backend, which stores the state locally in terraform.
+- Terraform format: The terraform fmt command is used to rewrite Terraform configuration files to a canonical format and style
+- Terraform plan: creates an execution plan, which lets you preview the changes that Terraform plans to make to your infrastructure
+- Terraform apply: executes the actions proposed in a Terraform plan to create, update, or destroy infrastructure. You can add the -auto-approve flag to automate the apply command.
+- Terraform destroy: This command is used to delete all resources managed by Terraform.
+
+Visit [terraform docs](https://developer.hashicorp.com/terraform/docs) for more information.
+
