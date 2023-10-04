@@ -137,3 +137,6 @@ Some common terraform commands include the following
 
 Visit [terraform docs](https://developer.hashicorp.com/terraform/docs) for more information.
 
+To create an [S3 bucket with terraform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) or any AWS resource remember to install the [AWS Provider block](https://registry.terraform.io/providers/hashicorp/aws/latest) and add the environment variables.
+
+
