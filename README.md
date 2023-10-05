@@ -168,3 +168,5 @@ The token can be generated from the Terraform cloud User settings token grid
   }
 }
 ```
+
+We automated the Terraform login process on GitHub by developing a Bash script. This script creates a JSON-format file containing the Terraform credentials block, checks if the `TERRAFORM_CLOUD_TOKEN` variable exists, and then copies the token to the credential file.
