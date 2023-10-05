@@ -170,3 +170,12 @@ The token can be generated from the Terraform cloud User settings token grid
 ```
 
 We automated the Terraform login process on GitHub by developing a Bash script. This script creates a JSON-format file containing the Terraform credentials block, checks if the `TERRAFORM_CLOUD_TOKEN` variable exists, and then copies the token to the credential file.
+
+### LINUX ALIAS
+We can save ourselves some time creating aliases for our most used commands.
+We created an alias for ***terraform*** by adding the following command to the `.bash_profile`
+```
+alias tf="terraform"
+```
+Alias can be saved parmanently by saving into either bashrc or bash_profile. 
+Bashrc is executed each time you open a new terminal window, while bash_profile is executed only once when you log in to your account. This means that any changes you make to bashrc will take effect immediately, while changes to bash_profile will take effect only when you log out and log back in again. You can find more information on creating parmanenet alias in [Ubunlog.com](https://ubunlog.com/en/alias-temporales-permanentes-comandos/)
