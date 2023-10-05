@@ -25,7 +25,7 @@ To learn more about Semantic Versioning, branching and tags, you can find useful
 
 Additionally, if you **encounter problems when pushing your commit to a remote repository due to permissions, please review your [Gitpod permissions](https://www.gitpod.io/docs/configure/authentication/github)**
 
-## TERRAFORM CLI INSTALLATION ON GITPOD USING BASH
+### TERRAFORM CLI INSTALLATION ON GITPOD USING BASH
 The Terraform CLI installation in the gitpod.yml file is broken due to gpg keyring changes. To address this issue, we refactored the script following the steps below:
 
 - Create an issue in Github to document the problem.
@@ -48,7 +48,7 @@ Here are resources that help in understanding this exercise.
 - [Linux file permissions](https://www.linuxfoundation.org/blog/blog/classic-sysadmin-understanding-linux-file-permissions)
 - [Gitpod task documentation](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
-## PROJECT ROOT ENVIRONMENT
+### PROJECT ROOT ENVIRONMENT
 We examined several methods for setting environment variables: one using a Bash script and the other using the Gitpod method with a .env file.
 
 Environment variables store information about the environment in which a process runs, and they can be accessed and manipulated within Bash scripts.
@@ -94,7 +94,7 @@ Environment variables store information about the environment in which a process
 
 When you open a new Bash terminal in VSCode, it will not be aware of environment variables set in another window. If you want the environment variable to persist across all future Bash terminals that are opened, you need to set the environment variable in your Bash profile, for example, in the `.bash-profile file`.
 
-## AWS CLI REFACTOR
+### AWS CLI REFACTOR
 We will be using a bash script to automate the installation of AWS CLI.
 
 The script can be found in the [`./bin/install_aws_cli`](./bin/install_aws_cli)
@@ -108,7 +108,7 @@ To verify the IAM user that is configured you can use the following command
 aws sts get-caller-identity
 ```
 
-## TERRAFORM RANDOM PROVIDER
+### TERRAFORM RANDOM PROVIDER
 For the bootcamp we will focus on Amazon Web Services (AWS) provider to interact with the many resources supported by AWS. It is required to configure the provider with the proper credentials before you can use it.
 
 **Terraform Provider**
@@ -140,3 +140,31 @@ Visit [terraform docs](https://developer.hashicorp.com/terraform/docs) for more 
 To create an [S3 bucket with terraform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) or any AWS resource remember to install the [AWS Provider block](https://registry.terraform.io/providers/hashicorp/aws/latest) and add the environment variables.
 
 
+### TERRAFORM CLOUD
+Terraform Cloud is a cloud-based service by HashiCorp that enhances the capabilities of Terraform. It provides an enhanced feature of storing the tfstate file in the cloud.
+
+**Workspaces** Are simply independently managed state files
+
+**Project** Is a collection of independently managed state files.
+
+When using terraform cloud to manage resources in AWS or any cloud provider you have to create the environment variables that will be used to authenticate into the cloud provider environment. 
+
+You can find more information on creating AWS environment credentials in the [Terraform Cloud documentation](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-create-variable-set)
+
+:warning: When attempting to log in to Terraform using the ***terraform login*** command, Gitpod encountered an issue with copying the token correctly. To resolve this, a workaround was implemented by creating the "credentials.tfrc.json" file and manually entering the credentials block
+
+```bash
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+
+open /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+The token can be generated from the Terraform cloud User settings token grid
+```
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "YOUR-TERRAFORM-CLOUD-TOKEN"
+    }
+  }
+}
+```

@@ -1,4 +1,13 @@
 terraform {
+
+  cloud {
+    organization = "ResumeApp"
+
+    workspaces {
+      name = "terra_house_1"
+    }
+  }
+
   required_providers {
     random = {
       source  = "hashicorp/random"
