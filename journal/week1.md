@@ -2,7 +2,7 @@
 
 ## Terraform module structure
 The [Terraform module structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure) is a file and directory layout recommended for reusable modules distributed in separate repositories.
-
+```
 Project root(.)
 |
 ├── README.md
@@ -24,4 +24,4 @@ Project root(.)
 │   │   ├── main.tf
 │   ├── exampleB/
 │   ├── .../
-
+```
