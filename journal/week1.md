@@ -70,3 +70,32 @@ Terraform loads variables in the following order, with later sources taking prec
 
 Visit [terraform document on input variables](https://developer.hashicorp.com/terraform/language/values/variables) for more information.
 
+### Terraform Output variables
+Output values make information about your infrastructure available on the command line, and can expose information for other Terraform configurations to use.
+
+Each output value exported by a module must be declared using an output block:
+```
+output "instance_ip_addr" {
+  value = aws_instance.server.private_ip
+}
+```
+Visit [terraform document on output variables](https://developer.hashicorp.com/terraform/language/values/outputs) for more information.
+
+
+## Dealing with Terraform drift
+To fix configuration drift in Terraform:
+
+1. Identify drift using `terraform plan`.
+2. Review the proposed changes.
+3. Resolve drift by updating your Terraform configuration or importing resources.
+4. Apply the changes with `terraform apply`.
+5. Repeat steps 1-4 until there's no drift.
+6. Enforce a "Terraform only" policy for changes.
+7. Consider automation and monitoring to prevent future drift.
+
+### Fixing missing resources with Terraform import
+Terraform can import existing infrastructure resources. This functionality lets you bring existing resources under Terraform management.
+```
+terraform import <resource_type>.<resource_name> <resource_id>
+```
+
