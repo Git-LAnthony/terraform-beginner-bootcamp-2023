@@ -25,3 +25,48 @@ Project root(.)
 │   ├── exampleB/
 │   ├── .../
 ```
+
+## Migrate Terraform state file
+We successfully migrated the terrform state file to our local repository by fist destroying the already deployed resource in AWS and then deleting the local `lock.hcl` file and terraform folder. 
+Follow [terraform cloud migration guide](https://developer.hashicorp.com/terraform/tutorials/cloud/cloud-migrate) on how to migrate your local state file to terraform cloud.
+Here are blog posts on how to migrate from cloud to local state storage
+- [Harshicorp Migration Issue 332214](https://github.com/hashicorp/terraform/issues/33214)
+-[Nerinthecloud.com](https://nedinthecloud.com/2022/03/03/migrating-state-data-off-terraform-cloud/)
+## Terraform variables
+There are two types of terraform variables.
+- Environment variables: These are variables that are stored in the CLI or bash interface eg is AWS or Azure credentials
+- Terraform variables: These are variables that are set in the tfvars file
+
+### Terraform Input variables
+When variables are declared in the root module of your configuration, they can be set in a number of ways:
+
+- In a Terraform Cloud workspace.
+- Individually, with the -var command line option.
+- In variable definitions (.tfvars) files, either specified on the command line or automatically loaded.
+- As environment variables.
+
+To specify individual variables on the command line, use the -var option when running the terraform plan and terraform apply commands:
+
+```
+terraform apply -var="image_id=ami-abc123"
+```
+
+The terraform tfvars file is the default file used to load variables
+
+To set lots of variables, it is more convenient to specify their values in a variable definitions file (with a filename ending in either .tfvars or .tfvars.json) and then specify that file on the command line with -var-file:
+```
+terraform apply -var-file="testing.tfvars"
+```
+
+If the same variable is assigned multiple values, Terraform uses the last value it finds, overriding any previous values. Note that the same variable cannot be assigned multiple values within a single source.
+
+Terraform loads variables in the following order, with later sources taking precedence over earlier ones:
+
+- Environment variables
+- The terraform.tfvars file, if present.
+- The terraform.tfvars.json file, if present.
+- Any *.auto.tfvars or *.auto.tfvars.json files, processed in lexical order of their filenames.
+- Any -var and -var-file options on the command line, in the order they are provided. (This includes variables set by a Terraform Cloud workspace.)
+
+Visit [terraform document on input variables](https://developer.hashicorp.com/terraform/language/values/variables) for more information.
+
