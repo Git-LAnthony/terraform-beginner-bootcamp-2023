@@ -99,3 +99,34 @@ Terraform can import existing infrastructure resources. This functionality lets 
 terraform import <resource_type>.<resource_name> <resource_id>
 ```
 
+## Terraform Modules
+
+It is recommended to place modules in a "modules" directory when developing modules locally, but you can name it whatever you like.
+
+### Passing Input Variables
+
+We can pass input variables to our module. The module has to declare the Terraform variables in its own "variables.tf" file.
+
+```hcl
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid = var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+###Module Sources
+
+Using the "source" attribute, we can import the module from various places, such as:
+
+- Locally
+- GitHub
+- Terraform Registry
+
+```hcl
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+}
+```
+
+Visit [terraform document on module source](https://developer.hashicorp.com/terraform/language/modules/sources) for more information.
