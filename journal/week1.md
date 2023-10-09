@@ -233,3 +233,11 @@ Result:
 ```json
 {"hello": "world"}
 ```
+
+### Lifecycle of Resources
+The [lifecycle meta-argument](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle) in Terraform is used to customize how resources are managed from creation to destruction. It includes options like "create_before_destroy" for resource replacement, "prevent_destroy" to make resources immutable, "ignore_changes" to specify attributes to ignore during updates, custom timeouts, and "create_before_destroy_timeout" for controlling the timeout of resource creation during updates. This meta-argument allows for precise control over resource management in Terraform.
+
+### Terraform `replace_triggered_by`
+The [replace_triggered_by](https://developer.hashicorp.com/terraform/language/resources/terraform-data) lifecycle argument requires all of the given addresses to be for resources, because the decision to force replacement is based on the planned actions for all of the mentioned resources.
+
+Plain data values such as Local Values and Input Variables don't have any side-effects to plan against and so they aren't valid in replace_triggered_by. You can use terraform_data's behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.
