@@ -130,3 +130,65 @@ module "terrahouse_aws" {
 ```
 
 Visit [terraform document on module source](https://developer.hashicorp.com/terraform/language/modules/sources) for more information.
+
+## Terraform S3 Static Website hosting
+To enable static website hosting on AWS S3 bucket the [aws_s3_bucket_website_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration) resource is used.
+```
+resource "aws_s3_bucket_website_configuration" "example" {
+  bucket = aws_s3_bucket.example.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+
+}
+```
+It is important to remember that most AI tools are not usually up to date and Terraform are periodically making updates to their providers therefore it is important to rely on Terraform documentation.
+
+### Uploading objects to S3 bucket
+To upload index.html and error.html files to an AWS S3 bucket using Terraform, you need to create the [aws_s3_bucket_object](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_object) resource. Examle
+```
+resource "aws_s3_bucket_object" "object" {
+  bucket = "your_bucket_name"
+  key    = "new_object_key"
+  source = "path/to/file"
+
+  # The filemd5() function is available in Terraform 0.11.12 and later
+  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+  # etag = "${md5(file("path/to/file"))}"
+  etag = filemd5("path/to/file")
+}
+```
+
+### Specifying the file path
+The [source argument](https://developer.hashicorp.com/terraform/language/modules/sources) in a module block tells Terraform where to find the source code for the desired child module.
+
+In terraform you can specify the path to a file by using the special `path` variable.
+You can visit [Terraform documentation on reference variable](https://developer.hashicorp.com/terraform/language/expressions/references) for more information. For example
+```
+resource "aws_s3_bucket_object" "object" {
+  bucket = aws_s3_bucket.website_example
+  key    = "index.html"
+  source = "path/to/file"
+}
+```
+
+### Terraform Fileexist function
+[fileexists](https://developer.hashicorp.com/terraform/language/functions/fileexists) determines whether a file exists at a given path. Functions are evaluated during configuration parsing rather than at apply time, so this function can only be used with files that are already present on disk before Terraform takes any actions. For example
+
+```
+variable "file_example" {
+  description = "The file path for the file"
+  type        = string
+
+  validation {
+    condition     = fileexists(var.file_example_path)
+    error_message = "The provided path for file_example does not exist."
+  }
+}
+```
+
