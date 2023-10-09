@@ -47,14 +47,14 @@ When variables are declared in the root module of your configuration, they can b
 
 To specify individual variables on the command line, use the -var option when running the terraform plan and terraform apply commands:
 
-```
+```hcl
 terraform apply -var="image_id=ami-abc123"
 ```
 
 The terraform tfvars file is the default file used to load variables
 
 To set lots of variables, it is more convenient to specify their values in a variable definitions file (with a filename ending in either .tfvars or .tfvars.json) and then specify that file on the command line with -var-file:
-```
+```hcl
 terraform apply -var-file="testing.tfvars"
 ```
 
@@ -74,7 +74,7 @@ Visit [terraform document on input variables](https://developer.hashicorp.com/te
 Output values make information about your infrastructure available on the command line, and can expose information for other Terraform configurations to use.
 
 Each output value exported by a module must be declared using an output block:
-```
+```hcl
 output "instance_ip_addr" {
   value = aws_instance.server.private_ip
 }
@@ -95,7 +95,7 @@ To fix configuration drift in Terraform:
 
 ### Fixing missing resources with Terraform import
 Terraform can import existing infrastructure resources. This functionality lets you bring existing resources under Terraform management.
-```
+```hcl
 terraform import <resource_type>.<resource_name> <resource_id>
 ```
 
@@ -133,7 +133,7 @@ Visit [terraform document on module source](https://developer.hashicorp.com/terr
 
 ## Terraform S3 Static Website hosting
 To enable static website hosting on AWS S3 bucket the [aws_s3_bucket_website_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration) resource is used.
-```
+```hcl
 resource "aws_s3_bucket_website_configuration" "example" {
   bucket = aws_s3_bucket.example.id
 
@@ -151,7 +151,7 @@ It is important to remember that most AI tools are not usually up to date and Te
 
 ### Uploading objects to S3 bucket
 To upload index.html and error.html files to an AWS S3 bucket using Terraform, you need to create the [aws_s3_bucket_object](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_object) resource. Examle
-```
+```hcl
 resource "aws_s3_bucket_object" "object" {
   bucket = "your_bucket_name"
   key    = "new_object_key"
@@ -169,7 +169,7 @@ The [source argument](https://developer.hashicorp.com/terraform/language/modules
 
 In terraform you can specify the path to a file by using the special `path` variable.
 You can visit [Terraform documentation on reference variable](https://developer.hashicorp.com/terraform/language/expressions/references) for more information. For example
-```
+```hcl
 resource "aws_s3_bucket_object" "object" {
   bucket = aws_s3_bucket.website_example
   key    = "index.html"
@@ -177,10 +177,10 @@ resource "aws_s3_bucket_object" "object" {
 }
 ```
 
-### Terraform Fileexist function
+### Terraform Fileexists function
 [fileexists](https://developer.hashicorp.com/terraform/language/functions/fileexists) determines whether a file exists at a given path. Functions are evaluated during configuration parsing rather than at apply time, so this function can only be used with files that are already present on disk before Terraform takes any actions. For example
 
-```
+```hcl
 variable "file_example" {
   description = "The file path for the file"
   type        = string
@@ -191,4 +191,45 @@ variable "file_example" {
   }
 }
 ```
+### Terraform Locals: Defining and Utilizing Local Variables
 
+Locals enable us to define and employ local variables, making them invaluable when we need to transform data into another format and make reference to a variable.
+
+```hcl
+locals {
+  s3_origin_id = "MyS3Origin"
+}
+```
+
+Visit [Terraform documentation on Local Values](https://developer.hashicorp.com/terraform/language/values/locals) for more information.
+
+### Terraform Data Sources: Accessing Cloud Resource Data
+
+Data sources permit us to access data from cloud resources, providing a convenient way to reference cloud resources without the need to import them explicitly.
+Visit [Terraform documentation on Data Sources](https://developer.hashicorp.com/terraform/language/data-sources) for more information.
+
+```hcl
+data "aws_caller_identity" "current" {}
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+```
+
+### Working with JSON in HCL
+
+We utilize [jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode) to create JSON policies inline within the HCL code.
+
+Example:
+
+```hcl
+jsonencode({
+  "hello" = "world"
+})
+```
+
+Result:
+
+```json
+{"hello": "world"}
+```
