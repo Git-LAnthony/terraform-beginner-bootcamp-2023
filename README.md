@@ -12,6 +12,7 @@ Here is a quick overview of the key points in this Terraform beginner bootcamp.:
 - Follow Terraform **best practices** for clean code.
 - Learn to **troubleshoot** common errors.
 - Gain practical experience through **projects**.
+
 ![image](https://github.com/Git-LAnthony/terraform-beginner-bootcamp-2023/assets/45934844/7b3e6f0d-9aeb-4e11-bd42-d439700bc7cf)
 
 ## Weekly Journal

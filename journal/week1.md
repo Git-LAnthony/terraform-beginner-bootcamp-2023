@@ -279,3 +279,13 @@ resource "aws_instance" "web" {
 
 ```
 While provisioners can be useful for specific tasks, they should be used carefully as they can add complexity and are not a replacement for dedicated configuration management tools like Ansible or Puppet.
+
+### Teraform Heredoc
+Terraform also supports a [heredoc](https://developer.hashicorp.com/terraform/language/expressions/strings#heredoc-strings) style of string literal inspired by Unix shell languages, which allows multi-line strings to be expressed more clearly. For example
+```
+<<EOT
+hello
+world
+EOT
+
+```
