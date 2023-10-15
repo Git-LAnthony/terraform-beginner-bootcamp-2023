@@ -289,3 +289,33 @@ world
 EOT
 
 ```
+## Uploading files to S3 bucket using Terraform
+When uploading files to S3 bucket the "aws_s3_object" resource is used. For example
+```hcl
+resource "aws_s3_object" "object" {
+  bucket = "your_bucket_name"
+  key    = "new_object_key"
+  source = "path/to/file"
+
+  # The filemd5() function is available in Terraform 0.11.12 and later
+  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+  # etag = "${md5(file("path/to/file"))}"
+  etag = filemd5("path/to/file")
+}
+```
+Visit terraform documentation on [uploading objects to AWS S3 bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_object.html) for more information.
+
+### For_each Expression
+Terraform uses either count or for_each to enumerate over data-tyoes. When you have a lsit of files to be uploaded it is best to use a for_each meta-argument. If a resource or module block includes a for_each argument whose value is a map or a set of strings, Terraform creates one instance for each member of that map or set. For example
+```hcl
+resource "azurerm_resource_group" "rg" {
+  for_each = {
+    a_group = "eastus"
+    another_group = "westus2"
+  }
+  name     = each.key
+  location = each.value
+}
+
+```
+Visit terraform documentation on [For_each](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each) for more information.
