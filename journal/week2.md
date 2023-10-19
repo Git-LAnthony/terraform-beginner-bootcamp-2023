@@ -50,3 +50,16 @@ bundle exec ruby server.rb
 ```
 
 All the code for our server is stored in the `server.rb` file.
+
+## CRUD
+Terraform Provider resources follow the CRUD paradigm, which is an acronym for Create, Read, Update, and Delete. This approach is commonly used to manage resources in information systems and databases. It corresponds to the following actions:
+
+- **Create:** This involves the creation of new resources or records. In the context of Terraform, it typically means provisioning or creating infrastructure components, such as virtual machines, networks, or databases.
+
+- **Read:** This action pertains to querying or retrieving information from existing resources. In Terraform, it involves inspecting the current state of the infrastructure to understand its configuration and status.
+
+- **Update:** Updating implies making modifications or changes to existing resources. Terraform allows you to modify the attributes or settings of resources, enabling you to adapt to evolving requirements.
+
+- **Delete:** Deletion involves the removal of resources that are no longer needed. Terraform enables you to destroy or delete infrastructure components when they are no longer required, which is crucial for resource management and cost control.
+
+This four-fold model is a fundamental concept in resource management and is widely applied in various fields, including software development, database management, and, as mentioned, infrastructure provisioning with Terraform. You can learn more about CRUD on [Wikipedia](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).

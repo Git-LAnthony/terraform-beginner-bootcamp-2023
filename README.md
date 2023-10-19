@@ -18,3 +18,4 @@ Here is a quick overview of the key points in this Terraform beginner bootcamp.:
 ## Weekly Journal
 - [Week0](journal/week0.md)
 - [Week1](journal/week1.md)
+- [Week2](journal/week2.md)
