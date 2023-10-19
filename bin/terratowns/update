@@ -6,8 +6,8 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-user_uuid="e328f4ab-b99f-421c-84c9-4ccea042c7d1" 
-token="9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
+user_uuid="0810103b-1b56-4657-afdf-401d1c2b9cc0" 
+token="1e2bceb3-d729-4ddb-b38d-d3b2ec947410"
 house_uuid="$1"
 name="New House [Updated]"
 description="A new house description. Its better than last time!"
