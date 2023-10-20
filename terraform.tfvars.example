@@ -1,9 +1,9 @@
 terratowns_endpoint="https://terratowns.cloud/api"
 ramen = {
   public_path = "/workspace/terraform-beginner-bootcamp-2023/public/ramen"
-  content_version = 1 
+  content_version = 2 
 }
 starwars = {
   public_path = "/workspace/terraform-beginner-bootcamp-2023/public/starwars"
-  content_version = 1 
+  content_version = 2 
 }

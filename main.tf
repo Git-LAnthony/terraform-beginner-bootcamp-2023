@@ -54,7 +54,7 @@ Ramen has gained international popularity and is enjoyed for its rich broth, che
 DESCRIPTION
   domain_name = module.home_ramen_hosting.domain_name
  # domain_name = "3fdq3gz.cloudfront.net"
-  town = "Cooker Crove"
+  town = "cooker-cove"
   content_version = var.ramen.content_version
 }
 
@@ -76,6 +76,6 @@ Cal must stay one step ahead of the Empire’s constant pursuit as he continues 
 DESCRIPTION
   domain_name = module.home_starwars_hosting.domain_name
  # domain_name = "3fdq3gz.cloudfront.net"
-  town = "Gamer's Grotto"
+  town = "gamers-grotto"
   content_version = var.starwars.content_version
 }
